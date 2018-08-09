@@ -1,20 +1,20 @@
 # d3-time-format
 
-This module provides a JavaScript implementation of the venerable [strptime](http://pubs.opengroup.org/onlinepubs/009695399/functions/strptime.html) and [strftime](http://pubs.opengroup.org/onlinepubs/007908799/xsh/strftime.html) functions from the C standard library, and can be used to parse or format [dates](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) in a variety of locale-specific representations. To format a date, create a [formatter](#locale_format) from a specifier (a string with the desired format *directives*, indicated by `%`); then pass a date to the formatter, which returns a string. For example, to convert the current date to a human-readable string:
+这个模块提供了来自 `C` 标准库 [strptime](http://pubs.opengroup.org/onlinepubs/009695399/functions/strptime.html) 和 [strftime](http://pubs.opengroup.org/onlinepubs/007908799/xsh/strftime.html) 的 `JavaScript` 实现, 并且可以用来对多种区域形式的 [dates](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) 进行解析或格式化。格式化日期，首先根据指定的说明符(由 `%` 表示的用来描述格式的*directives*)创建一个 [formatter](#locale_format)；然后将日期传递给 `formatter` 返回一个字符串。例如将当前日期转换为人类友好的字符串:
 
 ```js
 var formatTime = d3.timeFormat("%B %d, %Y");
 formatTime(new Date); // "June 30, 2015"
 ```
 
-Likewise, to convert a string back to a date, create a [parser](#locale_parse):
+同样的，将字符串解析为日期类型，需要创建一个 [parser](#locale_parse):
 
 ```js
 var parseTime = d3.timeParse("%B %d, %Y");
 parseTime("June 30, 2015"); // Tue Jun 30 2015 00:00:00 GMT-0700 (PDT)
 ```
 
-You can implement more elaborate conditional time formats, too. For example, here’s a [multi-scale time format](http://bl.ocks.org/mbostock/4149176) using [time intervals](https://github.com/d3/d3-time):
+你也可以实现更复杂的条件时间格式。例如使用 [time intervals](https://github.com/d3/d3-time) 实现的 [multi-scale time format](http://bl.ocks.org/mbostock/4149176):
 
 ```js
 var formatMillisecond = d3.timeFormat(".%L"),
@@ -37,11 +37,11 @@ function multiFormat(date) {
 }
 ```
 
-This module is used by D3 [time scales](https://github.com/d3/d3-scale/blob/master/README.md#time-scales) to generate human-readable ticks.
+这个模块可以被 [time scales](https://github.com/d3/d3-scale/blob/master/README.md#time-scales) 用来生成人类友好的刻度.
 
 ## Installing
 
-If you use NPM, `npm install d3-time-format`. Otherwise, download the [latest release](https://github.com/d3/d3-time-format/releases/latest). You can also load directly from [d3js.org](https://d3js.org), either as a [standalone library](https://d3js.org/d3-time-format.v2.min.js) or as part of [D3 4.0](https://github.com/d3/d3). AMD, CommonJS, and vanilla environments are supported. In vanilla, a `d3` global is exported:
+`NPM` 安装: `npm install d3-time-format`. 此外还可以下载 [latest release](https://github.com/d3/d3-time-format/releases/latest). 可以直接从 [d3js.org](https://d3js.org) 以 [standalone library](https://d3js.org/d3-time-format.v2.min.js) 或作为 [D3 4.0](https://github.com/d3/d3) 的一部分直接载入. 支持 `AMD`, `CommonJS` 以及基本的标签引入形式，如果使用标签引入则会暴露全局 `d3` 变量:
 
 ```html
 <script src="https://d3js.org/d3-time.v1.min.js"></script>
