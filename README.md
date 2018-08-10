@@ -53,7 +53,7 @@ var format = d3.timeFormat("%x");
 </script>
 ```
 
-Locale files are hosted on [unpkg](https://unpkg.com/) and can be loaded using [d3.json](https://github.com/d3/d3-request/blob/master/README.md#json). For example, to set Russian as the default locale:
+区域文件托管在 [unpkg](https://unpkg.com/)，可以直接使用 [d3.json](https://github.com/d3/d3-request/blob/master/README.md#json) 加载. 例如，将默认的区域配置设置为 `Russian`：
 
 ```js
 d3.json("https://unpkg.com/d3-time-format@2/locale/ru-RU.json", function(error, locale) {
@@ -67,33 +67,33 @@ d3.json("https://unpkg.com/d3-time-format@2/locale/ru-RU.json", function(error, 
 });
 ```
 
-[Try d3-time-format in your browser.](https://tonicdev.com/npm/d3-time-format)
+[在浏览器中测试 `d3-time-format`.](https://tonicdev.com/npm/d3-time-format)
 
 ## API Reference
 
 <a name="timeFormat" href="#timeFormat">#</a> d3.<b>timeFormat</b>(<i>specifier</i>) [<>](https://github.com/d3/d3-time-format/blob/master/src/defaultLocale.js#L4 "Source")
 
-An alias for [*locale*.format](#locale_format) on the [default locale](#timeFormatDefaultLocale).
+[default locale(默认区域设置)](#timeFormatDefaultLocale) 下 [*locale*.format](#locale_format) 的别名。
 
 <a name="timeParse" href="#timeParse">#</a> d3.<b>timeParse</b>(<i>specifier</i>) [<>](https://github.com/d3/d3-time-format/blob/master/src/defaultLocale.js#L5 "Source")
 
-An alias for [*locale*.parse](#locale_parse) on the [default locale](#timeFormatDefaultLocale).
+[default locale(默认区域设置)](#timeFormatDefaultLocale) 下 [*locale*.parse](#locale_parse) 的别名。
 
 <a name="utcFormat" href="#utcFormat">#</a> d3.<b>utcFormat</b>(<i>specifier</i>) [<>](https://github.com/d3/d3-time-format/blob/master/src/defaultLocale.js#L6 "Source")
 
-An alias for [*locale*.utcFormat](#locale_utcFormat) on the [default locale](#timeFormatDefaultLocale).
+[default locale(默认区域设置)](#timeFormatDefaultLocale) 下 [*locale*.utcFormat](#locale_utcFormat) 的别名。
 
 <a name="utcParse" href="#utcParse">#</a> d3.<b>utcParse</b>(<i>specifier</i>) [<>](https://github.com/d3/d3-time-format/blob/master/src/defaultLocale.js#L7 "Source")
 
-An alias for [*locale*.utcParse](#locale_utcParse) on the [default locale](#timeFormatDefaultLocale).
+[default locale(默认区域设置)](#timeFormatDefaultLocale) 下 [*locale*.utcParse](#locale_utcParse) 的别名。
 
 <a name="isoFormat" href="#isoFormat">#</a> d3.<b>isoFormat</b> [<>](https://github.com/d3/d3-time-format/blob/master/src/isoFormat.js "Source")
 
-The full [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) UTC time formatter. Where available, this method will use [Date.toISOString](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Date/toISOString) to format.
+符合 [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) 的 `UTC` 日期格式化器。这个方法使用 [Date.toISOString](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Date/toISOString) 来格式化日期。
 
 <a name="isoParse" href="#isoParse">#</a> d3.<b>isoParse</b> [<>](https://github.com/d3/d3-time-format/blob/master/src/isoParse.js "Source")
 
-The full [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) UTC time parser. Where available, this method will use the [Date constructor](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Date) to parse strings. If you depend on strict validation of the input format according to ISO 8601, you should construct a [UTC parser function](#utcParse):
+符合 [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) 的 `UTC` 日期解析器。这个方法使用 [Date constructor](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Date) 来解析字符串。如果字符串严格依据 `ISO 8601` 标准，则可以构建一个 [UTC parser function](#utcParse):
 
 ```js
 var strictIsoParse = d3.utcParse("%Y-%m-%dT%H:%M:%S.%LZ");
@@ -101,51 +101,53 @@ var strictIsoParse = d3.utcParse("%Y-%m-%dT%H:%M:%S.%LZ");
 
 <a name="locale_format" href="#locale_format">#</a> <i>locale</i>.<b>format</b>(<i>specifier</i>) [<>](https://github.com/d3/d3-time-format/blob/master/src/locale.js#L293 "Source")
 
-Returns a new formatter for the given string *specifier*. The specifier string may contain the following directives:
+根据指定的 *specifier* 返回一个新的日期格式化工具。指定的 `specifier` 必须包含以下指令:
 
-* `%a` - abbreviated weekday name.*
-* `%A` - full weekday name.*
-* `%b` - abbreviated month name.*
-* `%B` - full month name.*
-* `%c` - the locale’s date and time, such as `%x, %X`.*
-* `%d` - zero-padded day of the month as a decimal number [01,31].
-* `%e` - space-padded day of the month as a decimal number [ 1,31]; equivalent to `%_d`.
+* `%a` - 简写的周?.*
+* `%A` - 周?的全称.*
+* `%b` - 简写的月.*
+* `%B` - 月的全称.*
+* `%c` - 区域日期和时间, 比如 `%x, %X`.*
+* `%d` - 使用 `0` 填补位数的天 [01,31].
+* `%e` - 使用空格填补位数的天 [ 1,31]; 等价于 `%_d`.
 * `%f` - microseconds as a decimal number [000000, 999999].
-* `%H` - hour (24-hour clock) as a decimal number [00,23].
-* `%I` - hour (12-hour clock) as a decimal number [01,12].
-* `%j` - day of the year as a decimal number [001,366].
-* `%m` - month as a decimal number [01,12].
-* `%M` - minute as a decimal number [00,59].
-* `%L` - milliseconds as a decimal number [000, 999].
-* `%p` - either AM or PM.*
-* `%Q` - milliseconds since UNIX epoch.
-* `%s` - seconds since UNIX epoch.
-* `%S` - second as a decimal number [00,61].
-* `%u` - Monday-based (ISO 8601) weekday as a decimal number [1,7].
-* `%U` - Sunday-based week of the year as a decimal number [00,53].
-* `%V` - ISO 8601 week of the year as a decimal number [01, 53].
-* `%w` - Sunday-based weekday as a decimal number [0,6].
-* `%W` - Monday-based week of the year as a decimal number [00,53].
-* `%x` - the locale’s date, such as `%-m/%-d/%Y`.*
-* `%X` - the locale’s time, such as `%-I:%M:%S %p`.*
-* `%y` - year without century as a decimal number [00,99].
-* `%Y` - year with century as a decimal number.
-* `%Z` - time zone offset, such as `-0700`, `-07:00`, `-07`, or `Z`.
-* `%%` - a literal percent sign (`%`).
+* `%H` - `24` 小时制小时 [00,23].
+* `%I` - `12` 小时制小时 [01,12].
+* `%j` - 一年中的第几天 [001,366].
+* `%m` - 月份 [01,12].
+* `%M` - 分钟 [00,59].
+* `%L` - 毫秒 [000, 999].
+* `%p` - `AM` 或 `PM`.*
+* `%Q` - `UNIX` 毫秒.
+* `%s` - `UNIX` 秒.
+* `%S` - 秒 [00,61].
+* `%u` - 一周中的第几天 [1, 7] (`ISO 8601`)
+* `%U` - 一年中的第几周 [00,53].
+* `%V` - 一年中的第几周 [01,53] (`ISO 8601`)
+* `%w` - 从周日开始算起，是所在周的第几天 [0,6].
+* `%W` - 一年中的第几周，从周一开始算新的一周 [00,53].
+* `%x` - 区域日期格式, 比如 `%m/%d/%Y`.不同地方格式不一样*
+* `%X` - 区域时间格式, 比如 `%H:%M:%S`.不同地方格式不一样*
+* `%y` - 所在世纪的第几年( `16` ) [00,99].
+* `%Y` - 年的全写( `2016` ).
+* `%Z` - 返回当前时区，比如 `-0700`, `-07:00`, `-07`, or `Z`.
+* `%%` - 百分比 (`%`).
 
-Directives marked with an asterisk (\*) may be affected by the [locale definition](#localeFormat).
+带有星号 (\*) 的指令可能会受 [locale definition](#localeFormat) 的影响。
 
-For `%U`, all days in a new year preceding the first Sunday are considered to be in week 0. For `%W`, all days in a new year preceding the first Monday are considered to be in week 0. Week numbers are computed using [*interval*.count](https://github.com/d3/d3-time/blob/master/README.md#interval_count). For example, 2015-52 and 2016-00 represent Monday, December 28, 2015, while 2015-53 and 2016-01 represent Monday, January 4, 2016. This differs from the [ISO week date](https://en.wikipedia.org/wiki/ISO_week_date) specification (`%V`), which uses a more complicated definition!
+对于 `%U` 来说，在第一个星期日之前的新年里的所有日子都被认为是在第 `0` 周. 对于 `%W` ，在第一个星期一之前的新年里的所有日子都被认为是在第 `0` 周。周的数量可以使用 [*interval*.count](https://github.com/xswei/d3-time/blob/master/README.md#interval_count) 来计算。例如 `2015-52` 和 `2016-00` 代表 `Monday, December 28, 2015` 而 `2015-53` 和 `2016-01` 代表 `Monday, January 4, 2016`. 这与 [ISO week date](https://en.wikipedia.org/wiki/ISO_week_date) 说明符 `%V` 不同，它是一个更复杂的定义。
+
+对于 `%V`, [strftime man page](http://man7.org/linux/man-pages/man3/strftime.3.html) 里说道:
 
 For `%V`, per the [strftime man page](http://man7.org/linux/man-pages/man3/strftime.3.html):
 
-> In this system, weeks start on a Monday, and are numbered from 01, for the first week, up to 52 or 53, for the last week.  Week 1 is the first week where four or more days fall within the new year (or, synonymously, week 01 is: the first week of the year that contains a Thursday; or, the week that has 4 January in it).
+> 在这个系统中，周起始于 `Monday`，第一周从 `01` 开始而最后一周为 `52` 或 `53`。`Week 1` 是第 `1` 周，其中 `4` 天或更多天处于新的一年中(或者同理，`week 01` 是包含 `Thursday` 的第一周；或者包含一月四号).
 
-The `%` sign indicating a directive may be immediately followed by a padding modifier:
+`%` 符号后面可能会跟着一个填充字符:
 
-* `0` - zero-padding
-* `_` - space-padding
-* `-` - disable padding
+* `0` - `0` 填充
+* `_` - 空格填充
+* `-` - 禁止填充
 
 If no padding modifier is specified, the default is `0` for all directives except `%e`, which defaults to `_`. (In some implementations of strftime and strptime, a directive may include an optional field width or precision; this feature is not yet implemented.)
 
