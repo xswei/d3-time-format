@@ -71,19 +71,19 @@ d3.json("https://unpkg.com/d3-time-format@2/locale/ru-RU.json", function(error, 
 
 ## API Reference
 
-<a name="timeFormat" href="#timeFormat">#</a> d3.<b>timeFormat</b>(<i>specifier</i>) [<>](https://github.com/d3/d3-time-format/blob/master/src/defaultLocale.js#L4 "Source")
+<a name="timeFormat" href="#timeFormat">#</a> d3.<b>timeFormat</b>(<i>specifier</i>) [<源码>](https://github.com/d3/d3-time-format/blob/master/src/defaultLocale.js#L4 "Source")
 
 [default locale(默认区域设置)](#timeFormatDefaultLocale) 下 [*locale*.format](#locale_format) 的别名。
 
-<a name="timeParse" href="#timeParse">#</a> d3.<b>timeParse</b>(<i>specifier</i>) [<>](https://github.com/d3/d3-time-format/blob/master/src/defaultLocale.js#L5 "Source")
+<a name="timeParse" href="#timeParse">#</a> d3.<b>timeParse</b>(<i>specifier</i>) [<源码>](https://github.com/d3/d3-time-format/blob/master/src/defaultLocale.js#L5 "Source")
 
 [default locale(默认区域设置)](#timeFormatDefaultLocale) 下 [*locale*.parse](#locale_parse) 的别名。
 
-<a name="utcFormat" href="#utcFormat">#</a> d3.<b>utcFormat</b>(<i>specifier</i>) [<>](https://github.com/d3/d3-time-format/blob/master/src/defaultLocale.js#L6 "Source")
+<a name="utcFormat" href="#utcFormat">#</a> d3.<b>utcFormat</b>(<i>specifier</i>) [<源码>](https://github.com/d3/d3-time-format/blob/master/src/defaultLocale.js#L6 "Source")
 
 [default locale(默认区域设置)](#timeFormatDefaultLocale) 下 [*locale*.utcFormat](#locale_utcFormat) 的别名。
 
-<a name="utcParse" href="#utcParse">#</a> d3.<b>utcParse</b>(<i>specifier</i>) [<>](https://github.com/d3/d3-time-format/blob/master/src/defaultLocale.js#L7 "Source")
+<a name="utcParse" href="#utcParse">#</a> d3.<b>utcParse</b>(<i>specifier</i>) [<源码>](https://github.com/d3/d3-time-format/blob/master/src/defaultLocale.js#L7 "Source")
 
 [default locale(默认区域设置)](#timeFormatDefaultLocale) 下 [*locale*.utcParse](#locale_utcParse) 的别名。
 
@@ -99,9 +99,9 @@ d3.json("https://unpkg.com/d3-time-format@2/locale/ru-RU.json", function(error, 
 var strictIsoParse = d3.utcParse("%Y-%m-%dT%H:%M:%S.%LZ");
 ```
 
-<a name="locale_format" href="#locale_format">#</a> <i>locale</i>.<b>format</b>(<i>specifier</i>) [<>](https://github.com/d3/d3-time-format/blob/master/src/locale.js#L293 "Source")
+<a name="locale_format" href="#locale_format">#</a> <i>locale</i>.<b>format</b>(<i>specifier</i>) [<源码>](https://github.com/d3/d3-time-format/blob/master/src/locale.js#L293 "Source")
 
-根据指定的 *specifier* 返回一个新的日期格式化工具。指定的 `specifier` 必须包含以下指令:
+根据指定的 *specifier* 返回一个新的日期格式化工具。指定的 `specifier` 必须包含以下指令符:
 
 * `%a` - 简写的周?.*
 * `%A` - 周?的全称.*
@@ -110,7 +110,7 @@ var strictIsoParse = d3.utcParse("%Y-%m-%dT%H:%M:%S.%LZ");
 * `%c` - 区域日期和时间, 比如 `%x, %X`.*
 * `%d` - 使用 `0` 填补位数的天 [01,31].
 * `%e` - 使用空格填补位数的天 [ 1,31]; 等价于 `%_d`.
-* `%f` - microseconds as a decimal number [000000, 999999].
+* `%f` - 微秒 [000000, 999999].
 * `%H` - `24` 小时制小时 [00,23].
 * `%I` - `12` 小时制小时 [01,12].
 * `%j` - 一年中的第几天 [001,366].
@@ -133,13 +133,11 @@ var strictIsoParse = d3.utcParse("%Y-%m-%dT%H:%M:%S.%LZ");
 * `%Z` - 返回当前时区，比如 `-0700`, `-07:00`, `-07`, or `Z`.
 * `%%` - 百分比 (`%`).
 
-带有星号 (\*) 的指令可能会受 [locale definition](#localeFormat) 的影响。
+带有星号 (\*) 的指令符可能会受 [locale definition](#localeFormat) 的影响。
 
 对于 `%U` 来说，在第一个星期日之前的新年里的所有日子都被认为是在第 `0` 周. 对于 `%W` ，在第一个星期一之前的新年里的所有日子都被认为是在第 `0` 周。周的数量可以使用 [*interval*.count](https://github.com/xswei/d3-time/blob/master/README.md#interval_count) 来计算。例如 `2015-52` 和 `2016-00` 代表 `Monday, December 28, 2015` 而 `2015-53` 和 `2016-01` 代表 `Monday, January 4, 2016`. 这与 [ISO week date](https://en.wikipedia.org/wiki/ISO_week_date) 说明符 `%V` 不同，它是一个更复杂的定义。
 
-对于 `%V`, [strftime man page](http://man7.org/linux/man-pages/man3/strftime.3.html) 里说道:
-
-For `%V`, per the [strftime man page](http://man7.org/linux/man-pages/man3/strftime.3.html):
+对于 `%V`, [strftime man page](http://man7.org/linux/man-pages/man3/strftime.3.html) 里是这样解释的:
 
 > 在这个系统中，周起始于 `Monday`，第一周从 `01` 开始而最后一周为 `52` 或 `53`。`Week 1` 是第 `1` 周，其中 `4` 天或更多天处于新的一年中(或者同理，`week 01` 是包含 `Thursday` 的第一周；或者包含一月四号).
 
@@ -149,9 +147,9 @@ For `%V`, per the [strftime man page](http://man7.org/linux/man-pages/man3/strft
 * `_` - 空格填充
 * `-` - 禁止填充
 
-If no padding modifier is specified, the default is `0` for all directives except `%e`, which defaults to `_`. (In some implementations of strftime and strptime, a directive may include an optional field width or precision; this feature is not yet implemented.)
+如果没有指定填充修饰符，则默认除了 `%e` 以外所有的指令符使用 `0` 填充，`%e` 默认的填充符为 `_`. (在某些 `strftime` 和 `strptime` 的实现中，一个指令符可能包括一个可选的字段宽度或精度，但是这个特性在此模块中没有被实现)
 
-The returned function formats a specified *[date](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date)*, returning the corresponding string.
+返回的函数可以格式化指定的 *[date](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date)*， 返回对应的字符串。
 
 ```js
 var formatMonth = d3.timeFormat("%B"),
@@ -162,39 +160,39 @@ formatMonth(date); // "May"
 formatDay(date); // "Thursday"
 ```
 
-<a name="locale_parse" href="#locale_parse">#</a> <i>locale</i>.<b>parse</b>(<i>specifier</i>) [<>](https://github.com/d3/d3-time-format/blob/master/src/locale.js#L298 "Source")
+<a name="locale_parse" href="#locale_parse">#</a> <i>locale</i>.<b>parse</b>(<i>specifier</i>) [<源码>](https://github.com/d3/d3-time-format/blob/master/src/locale.js#L298 "Source")
 
-Returns a new parser for the given string *specifier*. The specifier string may contain the same directives as [*locale*.format](#locale_format). The `%d` and `%e` directives are considered equivalent for parsing.
+根据指定的 *specifier* 返回一个新的解析器。指定的字符串可以包含和 [*locale*.format](#locale_format) 相同的指令符。对与解析，`%d` 和 `%e` 被看做是等同的。
 
-The returned function parses a specified *string*, returning the corresponding [date](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date) or null if the string could not be parsed according to this format’s specifier. Parsing is strict: if the specified <i>string</i> does not exactly match the associated specifier, this method returns null. For example, if the associated specifier is `%Y-%m-%dT%H:%M:%SZ`, then the string `"2011-07-01T19:15:28Z"` will be parsed as expected, but `"2011-07-01T19:15:28"`, `"2011-07-01 19:15:28"` and `"2011-07-01"` will return null. (Note that the literal `Z` here is different from the time zone offset directive `%Z`.) If a more flexible parser is desired, try multiple formats sequentially until one returns non-null.
+返回的方法可以将指定的 *string* 解析为对应的 [date](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date) 或 `null` (如果字符串不能被解析时)。解析过程是严格的: 如果指定的 <i>string</i> 不能恰好匹配关联的说明符，这个方法返回 `null`。例如如果说明符为 `%Y-%m-%dT%H:%M:%SZ` 而传入的字符串为 `"2011-07-01T19:15:28Z"` 则会被正确解析，但是如果传入 `"2011-07-01T19:15:28"`, `"2011-07-01 19:15:28"` 或 `"2011-07-01"` 则返回 `null`。(注意这里的 `Z` 与时区偏移指令 `%Z` 不同。)如果希望解析器更灵活则可以尝试多种格式直到返回 `non-null` 为止。
 
-<a name="locale_utcFormat" href="#locale_utcFormat">#</a> <i>locale</i>.<b>utcFormat</b>(<i>specifier</i>) [<>](https://github.com/d3/d3-time-format/blob/master/src/locale.js#L303 "Source")
+<a name="locale_utcFormat" href="#locale_utcFormat">#</a> <i>locale</i>.<b>utcFormat</b>(<i>specifier</i>) [<源码>](https://github.com/d3/d3-time-format/blob/master/src/locale.js#L303 "Source")
 
-Equivalent to [*locale*.format](#locale_format), except all directives are interpreted as [Coordinated Universal Time (UTC)](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) rather than local time.
+等价于 [*locale*.format](#locale_format), 只不过所有的指令都被解释为 [Coordinated Universal Time (UTC)](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) 而不是区域时间.
 
-<a name="locale_utcParse" href="#locale_utcParse">#</a> <i>locale</i>.<b>utcParse</b>(<i>specifier</i>) [<>](https://github.com/d3/d3-time-format/blob/master/src/locale.js#L308 "Source")
+<a name="locale_utcParse" href="#locale_utcParse">#</a> <i>locale</i>.<b>utcParse</b>(<i>specifier</i>) [<源码>](https://github.com/d3/d3-time-format/blob/master/src/locale.js#L308 "Source")
 
-Equivalent to [*locale*.parse](#locale_parse), except all directives are interpreted as [Coordinated Universal Time (UTC)](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) rather than local time.
+Equivalent to [*locale*.parse](#locale_parse), 只不过所有的指令都被解释为 [Coordinated Universal Time (UTC)](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) 而不是区域时间.
 
 ### Locales
 
-<a name="timeFormatLocale" href="#timeFormatLocale">#</a> d3.<b>timeFormatLocale</b>(<i>definition</i>) [<>](https://github.com/d3/d3-time-format/blob/master/src/locale.js "Source")
+<a name="timeFormatLocale" href="#timeFormatLocale">#</a> d3.<b>timeFormatLocale</b>(<i>definition</i>) [<源码>](https://github.com/d3/d3-time-format/blob/master/src/locale.js "Source")
 
-Returns a *locale* object for the specified *definition* with [*locale*.format](#locale_format), [*locale*.parse](#locale_parse), [*locale*.utcFormat](#locale_utcFormat), [*locale*.utcParse](#locale_utcParse) methods. The *definition* must include the following properties:
+根据指定的 *definition* 定义的 [*locale*.format](#locale_format), [*locale*.parse](#locale_parse), [*locale*.utcFormat](#locale_utcFormat), [*locale*.utcParse](#locale_utcParse) 方法返回一个 *locale* 对象。*definition* 必须包含以下属性:
 
-* `dateTime` - the date and time (`%c`) format specifier (<i>e.g.</i>, `"%a %b %e %X %Y"`).
-* `date` - the date (`%x`) format specifier (<i>e.g.</i>, `"%m/%d/%Y"`).
-* `time` - the time (`%X`) format specifier (<i>e.g.</i>, `"%H:%M:%S"`).
-* `periods` - the A.M. and P.M. equivalents (<i>e.g.</i>, `["AM", "PM"]`).
-* `days` - the full names of the weekdays, starting with Sunday.
-* `shortDays` - the abbreviated names of the weekdays, starting with Sunday.
-* `months` - the full names of the months (starting with January).
-* `shortMonths` - the abbreviated names of the months (starting with January).
+* `dateTime` - 日期和时间 (`%c`) 格式化说明符 (<i>例如.</i>, `"%a %b %e %X %Y"`).
+* `date` - 日期 (`%x`) 格式化说明符 (<i>例如</i>, `"%m/%d/%Y"`).
+* `time` - 时间 (`%X`) 格式化说明符 (<i>例如</i>, `"%H:%M:%S"`).
+* `periods` - `A.M.` 和 `P.M.` (<i>例如</i>, `["AM", "PM"]`).
+* `days` - 以 `Sunday` 为起始的周几的全称.
+* `shortDays` - 以 `Sunday` 为起始的周几的简称.
+* `months` - 以 `January` 为起始的月份的全称.
+* `shortMonths` - 以 `January` 为起始的月份的简称.
 
-For an example, see [Localized Time Axis II](https://bl.ocks.org/mbostock/805115ebaa574e771db1875a6d828949).
+参考 [Localized Time Axis II](https://bl.ocks.org/mbostock/805115ebaa574e771db1875a6d828949).
 
-<a name="timeFormatDefaultLocale" href="#timeFormatDefaultLocale">#</a> d3.<b>timeFormatDefaultLocale</b>(<i>definition</i>) [<>](https://github.com/d3/d3-time-format/blob/master/src/defaultLocale.js "Source")
+<a name="timeFormatDefaultLocale" href="#timeFormatDefaultLocale">#</a> d3.<b>timeFormatDefaultLocale</b>(<i>definition</i>) [<源码>](https://github.com/d3/d3-time-format/blob/master/src/defaultLocale.js "Source")
 
-Equivalent to [d3.timeFormatLocale](#timeFormatLocale), except it also redefines [d3.timeFormat](#timeFormat), [d3.timeParse](#timeParse), [d3.utcFormat](#utcFormat) and [d3.utcParse](#utcParse) to the new locale’s [*locale*.format](#locale_format), [*locale*.parse](#locale_parse), [*locale*.utcFormat](#locale_utcFormat) and [*locale*.utcParse](#locale_utcParse). If you do not set a default locale, it defaults to [U.S. English](https://github.com/d3/d3-time-format/blob/master/locale/en-US.json).
+等价于 [d3.timeFormatLocale](#timeFormatLocale), 只不过为 [*locale*.format](#locale_format), [*locale*.parse](#locale_parse), [*locale*.utcFormat](#locale_utcFormat) 和 [*locale*.utcParse](#locale_utcParse) 重新定义了 [d3.timeFormat](#timeFormat), [d3.timeParse](#timeParse), [d3.utcFormat](#utcFormat) 和 [d3.utcParse](#utcParse)。如果没有设置默认的时区，则默认为 [U.S. English](https://github.com/d3/d3-time-format/blob/master/locale/en-US.json).
 
-For an example, see [Localized Time Axis](https://bl.ocks.org/mbostock/6f1cc065d4d172bcaf322e399aa8d62f).
+参考 [Localized Time Axis](https://bl.ocks.org/mbostock/6f1cc065d4d172bcaf322e399aa8d62f).
